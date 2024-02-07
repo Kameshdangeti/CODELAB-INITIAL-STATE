@@ -50,6 +50,7 @@
         }git 
 ##### ->Now open the Emulator Ui using http://127.0.0.1:4000/.check the Authentication,firestore,functions,Hosting   Emulators are in ON mode.
 ##### ->Check all the items are imported in Firestore blog.
+
 ## d.Run and Debugg the App
 ##### ->Firstly open the app by using the http://127.0.0.1:5000 you can see the webiste of shopping app.
 ##### ->In that pick an item add to cart but we get error.So we need to fix that bug by debugging it.
@@ -64,6 +65,33 @@
     } 
 ##### ->Now refersh the page and add items to cart we should see the error as you must be signe in.
 
+## e.Create Security rules inbuilted for your app.
+##### ->In the editor, open the file emulators-codelab/codelab-initial-state/firestore.rules. You'll see that we have three main sections in our rules.
+##### ->Right now anyone can read and write data to our database! We want to make sure that only valid operations get through and that we don't leak any sensitive information.
+##### ->Let's update the first two rules to deny access by setting the condition to false:
+        rules_version = '2';
+        service cloud.firestore {
+        match /databases/{database}/documents {
+            // User's cart metadata
+            match /carts/{cartID} {
+            // UPDATE THIS LINE
+            allow read, write: if false;
+            }
+
+            // Items inside the user's cart
+            match /carts/{cartID}/items/{itemID} {
+            // UPDATE THIS LINE
+            allow read, write: if false;
+            }
+
+            // All items available in the store. Users can read
+            // items but never write them.
+            match /items/{itemID} {
+            allow read: if true;
+            }
+          }
+        }
+        
 
 
 
