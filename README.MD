@@ -31,6 +31,25 @@
 ##### -------------->firebase login
 #### ->Next run the following command to create a project alias.
 ##### -------------->firebase use $YOUR_PROJECT_ID
+## c.Run The Emulators
+#### ->In this section we will run the emulators sing the follwing command.
+##### -------------->firebase emulators:start --import=./seed 
+#### ->Now emulators starts and output is occured.
+#### ->Now we should connect our app to emulators by adding some code to public/js/homepage.js.
+#### ->open the above file and add below code and save it.
+##### -------------->const auth = firebaseApp.auth();
+    **  const db = firebaseApp.firestore();
+
+
+        // ADD THESE LINES
+        if (location.hostname === "127.0.0.1") 
+        {
+            console.log("127.0.0.1 detected!");
+            auth.useEmulator("http://127.0.0.1:9099");
+            db.useEmulator("127.0.0.1", 8080);
+        }**
+#### ->Now open the Emulator Ui using http://127.0.0.1:4000/.check the Authentication,firestore,functions,Hosting   Emulators are in ON mode.
+#### ->Check all the items are imported in Firestore blog.
 
 
 
