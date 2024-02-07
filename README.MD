@@ -94,7 +94,7 @@
 ## f.Run the emulators and test it
 ##### ->Now start the emulators again,if it is noy running
 ##### ->Now open new command line and move to functions directory and run the tests:
-###### ->npm test
+###### --------------->npm test
 ##### ->We can see 4 failing.
 
 ## g.Secure Cart Access
@@ -110,6 +110,24 @@
             allow read, update, delete: if request.auth.uid == resource.data.ownerUID;
             }
         }
+##### ->Now test again now we can see only 2 failing.
+
+## h.Allow Cart Item acces And Test
+##### ->The remaining 2 failures can be overcome by updating these lines in firestore.rules.
+        rules_version = '2';
+        service cloud.firestore {
+        match /databases/{database}/documents {
+            // ...
+
+            // UPDATE THESE LINES
+            match /carts/{cartID}/items/{itemID} {
+            allow read, write: if get(/databases/$(database)/documents/carts/$(cartID)).data.ownerUID == request.auth.uid;
+            }
+
+            // ...
+        }
+        }
+##### ->Now test again we get 0 failures but one pending item,we should look into it.
 
 
 
