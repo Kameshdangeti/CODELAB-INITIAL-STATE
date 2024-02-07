@@ -10,7 +10,7 @@
 
 ## b.Setup Code
 #### ->In this codelab, you start off with a version of The Fire Store sample that is nearly complete, so the first thing you need to do is clone the source code.
-  #####     git clone https://github.com/firebase/emulators-codelab.git
+  #####     -------------->git clone https://github.com/firebase/emulators-codelab.git
 #### ->After cloning,change the directory of the codelab like this.
 #####       cd emulators-codelab/codelab-initial-state
 #### ->Now Open the the folder in Visual Studio Code/Atom or Sublime Text.
@@ -31,5 +31,6 @@
 #####       firebase login
 #### ->Next run the following command to create a project alias.
 #####       firebase use $YOUR_PROJECT_ID
+
 
 
