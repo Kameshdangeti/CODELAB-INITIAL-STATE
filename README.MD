@@ -65,7 +65,7 @@
     } 
 ##### ->Now refersh the page and add items to cart we should see the error as you must be signe in.
 
-## e.Create Security rules inbuilted for your app.
+## e.Create Security rules inbuilted for app.
 ##### ->In the editor, open the file emulators-codelab/codelab-initial-state/firestore.rules. You'll see that we have three main sections in our rules.
 ##### ->Right now anyone can read and write data to our database! We want to make sure that only valid operations get through and that we don't leak any sensitive information.
 ##### ->Let's update the first two rules to deny access by setting the condition to false:
@@ -91,7 +91,27 @@
             }
           }
         }
-        
+## f.Run the emulators and test it
+##### ->Now start the emulators again,if it is noy running
+##### ->Now open new command line and move to functions directory and run the tests:
+###### ->npm test
+##### ->We can see 4 failing.
+
+## g.Secure Cart Access
+##### ->The first two failures are the "shopping cart" tests which test that:
+###### Users can only create and update their own carts.
+###### Users can only read their own carts.
+##### ->open the security rules file, firestore.rules, and update the statements within match /carts/{cartID}
+        rules_version = '2';
+        service cloud.firestore {
+            // UPDATE THESE LINES
+            match /carts/{cartID} {
+            allow create: if request.auth.uid == request.resource.data.ownerUID;
+            allow read, update, delete: if request.auth.uid == resource.data.ownerUID;
+            }
+        }
+
+
 
 
 
